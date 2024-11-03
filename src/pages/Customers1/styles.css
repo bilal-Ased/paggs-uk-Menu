@@ -1,0 +1,66 @@
+.my-fancy-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 20px 0;
+  font-size: 16px;
+  text-align: left;
+}
+
+.my-fancy-table th,
+.my-fancy-table td {
+  padding: 12px 15px;
+  border: 1px solid #ddd;
+}
+
+.my-fancy-table thead {
+  background-color: #f4f4f4;
+  font-weight: bold;
+}
+
+.my-fancy-table thead th {
+  border-bottom: 2px solid #ddd;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.my-fancy-table tbody tr {
+  border-bottom: 1px solid #ddd;
+}
+
+.my-fancy-table tbody tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.my-fancy-table tbody tr:hover {
+  background-color: #eedfdf;
+}
+
+.my-fancy-table tbody td {
+  color: #333;
+}
+
+/* Optional - add some responsive behavior */
+@media screen and (max-width: 600px) {
+  .my-fancy-table thead {
+    display: none;
+  }
+  .my-fancy-table tbody td {
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+    text-align: right;
+    position: relative;
+    padding-left: 50%;
+  }
+  .my-fancy-table tbody td:before {
+    content: attr(data-label);
+    position: absolute;
+    left: 10px;
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+}
+
+.pagination-active {
+  background-color: red !important;
+}
