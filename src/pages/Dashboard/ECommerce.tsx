@@ -14,7 +14,8 @@ import { DashboardStats } from './DashTypes.tsx';
 const ECommerce = () => {
   const [stats, setStats] = useState<DashboardStats>({
     customers: 0,
-    tickets: 0,
+    bookings: 0,
+    bookings_today: 0,
   });
 
   useEffect(() => {
@@ -34,7 +35,7 @@ const ECommerce = () => {
       <div className="grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-6 xl:grid-cols-4 2xl:gap-7.5">
         <CardOne stats={stats} />
         <CardTwo stats={stats} />
-        <CardThree />
+        <CardThree stats={stats} />
         <CardFour />
       </div>
 

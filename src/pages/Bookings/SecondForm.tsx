@@ -1,4 +1,7 @@
-export const SecondForm = () => {
+type Props = { customer: any };
+
+export const SecondForm = ({ customer }: Props) => {
+  console.log('customer->second', customer);
   return (
     <>
       <br />
@@ -38,7 +41,6 @@ export const SecondForm = () => {
                     </div>
                   </div>
                 </div>
-
                 <div className="mb-4.5 flex flex-col gap-6 xl:flex-row">
                   <div className="w-full xl:w-1/2">
                     <label className="mb-2.5 block text-black dark:text-white">
@@ -68,11 +70,13 @@ export const SecondForm = () => {
                       className="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
                     />
                   </div>
+                
                 </div>
-
-                <button className="flex w-full justify-center rounded bg-primary p-3 font-medium text-gray">
-                  Submit
-                </button>
+                <div className="flex justify-end">
+                  <button className="justify-center rounded bg-primary p-3 font-medium text-white">
+                    Submit
+                  </button>
+                </div>
               </div>
             </form>
           </div>

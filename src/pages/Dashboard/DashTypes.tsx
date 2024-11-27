@@ -1,6 +1,7 @@
 export type DashboardStats = {
   customers: number;
-  tickets: number;
+  bookings: number;
+  bookings_today: number;
 };
 
 export type DashboardProps = {

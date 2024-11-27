@@ -21,6 +21,7 @@ export default function HorizontalLinearStepper() {
   });
 
   const [errors, setErrors] = useState({});
+  const [customer, setCustomer] = useState(undefined);
 
   const isStepOptional = (step: number) => {
     return step === 1;
@@ -64,6 +65,12 @@ export default function HorizontalLinearStepper() {
     setActiveStep(0);
   };
 
+  const onSuccess = (cust: any) => {
+    if (cust) {
+      setCustomer(cust);
+      handleNext();
+    }
+  };
   return (
     <Box sx={{ width: '80%', marginInline: '3rem', marginTop: '2rem' }}>
       <Stepper activeStep={activeStep}>
@@ -99,8 +106,8 @@ export default function HorizontalLinearStepper() {
         </React.Fragment>
       ) : (
         <React.Fragment>
-          {activeStep === 0 && <FirstForm />}
-          {activeStep === 1 && <SecondForm />}
+          {activeStep === 0 && <FirstForm onSuccess={onSuccess} />}
+          {activeStep === 1 && <SecondForm customer={customer} />}
           {/* <Typography sx={{ mt: 2, mb: 1 }}>Step {activeStep + 1}</Typography> */}
           <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
             <Button

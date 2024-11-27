@@ -239,70 +239,72 @@ const Menu = () => {
   );
 
   return (
-    <div className="menu-container">
-      <div className="price-options">
-        <p>
-          <span
-            onClick={() => handleMenuToggle('A La Carte')}
-            style={{
-              cursor: 'pointer',
-              fontWeight: selectedMenu === 'A La Carte' ? 'bold' : 'normal',
-              color: selectedMenu === 'A La Carte' ? '#b29d79' : '#6a553d', // Highlight color
-            }}
-          >
-            A La Carte Menu
-          </span>
-        </p>
-        <p>
-          <span
-            onClick={() => handleMenuToggle('Set Menu')}
-            style={{
-              cursor: 'pointer',
-              fontWeight: selectedMenu === 'Set Menu' ? 'bold' : 'normal',
-              color: selectedMenu === 'Set Menu' ? '#b29d79' : '#6a553d', // Highlight color
-            }}
-          >
-            Set Menu
-          </span>{' '}
-          £25
-        </p>
-      </div>
+    <div className="menu-page">
+      <div className="menu-container">
+        <div className="price-options">
+          <p>
+            <span
+              onClick={() => handleMenuToggle('A La Carte')}
+              style={{
+                cursor: 'pointer',
+                fontWeight: selectedMenu === 'A La Carte' ? 'bold' : 'normal',
+                color: selectedMenu === 'A La Carte' ? '#b29d79' : '#6a553d', // Highlight color
+              }}
+            >
+              A La Carte Menu
+            </span>
+          </p>
+          <p>
+            <span
+              onClick={() => handleMenuToggle('Set Menu')}
+              style={{
+                cursor: 'pointer',
+                fontWeight: selectedMenu === 'Set Menu' ? 'bold' : 'normal',
+                color: selectedMenu === 'Set Menu' ? '#b29d79' : '#6a553d', // Highlight color
+              }}
+            >
+              Set Menu
+            </span>{' '}
+            £25
+          </p>
+        </div>
 
-      <div className="dropdown-container">
-        <label className="dropdown-label" htmlFor="menuSectionDropdown">
-          Select Menu Section:
-        </label>
-        <select
-          id="menuSectionDropdown"
-          className="styled-dropdown"
-          onChange={handleSectionChange}
-          value={selectedSection}
-          title="Select a menu section to see the items available."
-        >
-          {currentMenu.map((section) => (
-            <option key={section.title} value={section.title}>
-              {section.title}
-            </option>
-          ))}
-        </select>
-      </div>
+        <div className="dropdown-container">
+          <label className="dropdown-label" htmlFor="menuSectionDropdown">
+            Select Menu Section:
+          </label>
+          <select
+            id="menuSectionDropdown"
+            className="styled-dropdown"
+            onChange={handleSectionChange}
+            value={selectedSection}
+            title="Select a menu section to see the items available."
+          >
+            {currentMenu.map((section) => (
+              <option key={section.title} value={section.title}>
+                {section.title}
+              </option>
+            ))}
+          </select>
+        </div>
 
-      <div className="menu-section">
-        <div className="divider"></div>
-        <p className="menu-section-title">{currentSection.title}</p>
-        <div className="divider"></div>
-        {currentSection.items.map((item) => (
-          <div key={item.name} className="menu-item">
-            <div className="menu-item-body">
-              <p className="menu-item-title">{item.name}</p>
-              {item.description && (
-                <p className="menu-item-description">{item.description}</p>
-              )}
-              {item.price && <p className="menu-price">{item.price}</p>}
+        <div className="menu-section">
+          <div className="divider"></div>
+          <p className="menu-section-title">{currentSection.title}</p>
+          <div className="divider"></div>
+          {currentSection.items.map((item) => (
+            <div key={item.name} className="menu-item">
+              <div className="menu-item-body">
+                <p className="menu-item-title">{item.name}</p>
+                {item.description && (
+                  <p className="menu-item-description">{item.description}</p>
+                )}
+                {item.price && <p className="menu-price">{item.price}</p>}
+              </div>
+              <div className="divider"></div> {/* Divider after each item */}
             </div>
-            <div className="divider"></div> {/* Divider after each item */}
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
     </div>
   );
