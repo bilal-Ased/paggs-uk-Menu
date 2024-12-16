@@ -5,7 +5,7 @@ const Customers = () => {
   const [customers, setCustomers] = useState([]);
 
   useEffect(() => {
-    fetch('http://127.0.0.1:8000/api/customers-list')
+    fetch('https://coral-app-fvdip.ondigitalocean.app/api/customers-list')
       .then((res) => {
         return res.json();
       })
