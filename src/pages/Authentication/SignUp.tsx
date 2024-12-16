@@ -29,7 +29,7 @@ const SignUp = () => {
     setSuccessMessage('');
 
     try {
-      const response = await fetch('http://127.0.0.1:8000/api/register/user', {
+      const response = await fetch('https://coral-app-fvdip.ondigitalocean.app/api/register/user', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

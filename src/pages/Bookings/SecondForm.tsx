@@ -48,7 +48,7 @@ export const SecondForm = ({ customer, onBookingSuccess }: Props) => {
 
     // Send the form data to the server
     try {
-      const response = await fetch('http://127.0.0.1:8000/api/booking/store', {
+      const response = await fetch('https://coral-app-fvdip.ondigitalocean.app/api/booking/store', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
