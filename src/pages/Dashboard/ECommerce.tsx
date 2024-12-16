@@ -17,7 +17,7 @@ const ECommerce = () => {
   });
 
   useEffect(() => {
-    fetch('http://127.0.0.1:8000/api/dashboard/stats')
+    fetch('https://coral-app-fvdip.ondigitalocean.app/api/dashboard/stats')
       .then((response) => response.json())
       .then((data) => {
         if (data) {
