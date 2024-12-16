@@ -98,7 +98,7 @@ const ChartOne: React.FC = () => {
     const fetchBookingData = async () => {
       try {
         const response = await axios.get(
-          'http://127.0.0.1:8000/api/chart-data',
+          'https://coral-app-fvdip.ondigitalocean.app/api/chart-data',
         );
         const data = response.data.data;
 
