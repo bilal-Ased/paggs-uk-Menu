@@ -38,7 +38,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
         // Check if the token exists before making the request
         if (token) {
-          const response = await fetch('http://127.0.0.1:8000/api/user', {
+          const response = await fetch('https://coral-app-fvdip.ondigitalocean.app/api/user', {
             method: 'GET',
             headers: {
               Authorization: `Bearer ${token}`, // Add the Bearer token for authentication

@@ -16,7 +16,7 @@ const Users = () => {
   useEffect(() => {
     setLoading(true);
     fetch(
-      `http://127.0.0.1:8000/api/users/list?page=${page}&search=${searchTerm}&sort=${sortField}&order=${sortOrder}`,
+      `https://coral-app-fvdip.ondigitalocean.app/api/users/list?page=${page}&search=${searchTerm}&sort=${sortField}&order=${sortOrder}`,
     )
       .then((res) => res.json())
       .then((rawData) => {
