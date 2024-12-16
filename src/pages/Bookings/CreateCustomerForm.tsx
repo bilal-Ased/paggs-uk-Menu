@@ -34,7 +34,7 @@ function CreateCustomerForm({ handleSelectedCustomer }: Props) {
     };
 
     try {
-      const baseUrl = 'http://127.0.0.1:8000/api';
+      const baseUrl = 'https://coral-app-fvdip.ondigitalocean.app/api';
       const response = await fetch(`${baseUrl}/customers`, {
         method: 'POST',
         headers: {
