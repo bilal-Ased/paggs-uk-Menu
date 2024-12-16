@@ -19,7 +19,7 @@ const AllBookings = () => {
   useEffect(() => {
     setLoading(true);
     fetch(
-      `http://127.0.0.1:8000/api/booking/list?page=${page}&search=${searchTerm}&from_date=${fromDate}&to_date=${toDate}&sort=${sortField}&order=${sortOrder}`
+      `https://coral-app-fvdip.ondigitalocean.app/api/booking/list?page=${page}&search=${searchTerm}&from_date=${fromDate}&to_date=${toDate}&sort=${sortField}&order=${sortOrder}`
     )
       .then((res) => res.json())
       .then((rawData) => {

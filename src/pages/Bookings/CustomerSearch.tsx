@@ -31,7 +31,7 @@ const CustomerSearch = ({ handleSelectedCustomer }: Props) => {
 
     try {
       const response = await fetch(
-        `http://127.0.0.1:8000/api/customers/list?search=${query}`,
+        `https://coral-app-fvdip.ondigitalocean.app/api/customers/list?search=${query}`,
       );
       const resp = await response.json();
 
