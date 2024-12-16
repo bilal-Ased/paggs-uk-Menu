@@ -79,7 +79,7 @@ const DropdownNotification = () => {
             >
               <p className="text-sm">
                 <span className="text-black dark:text-white">
-                  Edit your information in a swipe
+                  Table your information in a swipe
                 </span>{' '}
                 Sint occaecat cupidatat non proident, sunt in culpa qui officia
                 deserunt mollit anim.

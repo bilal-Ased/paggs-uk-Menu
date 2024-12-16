@@ -34,7 +34,7 @@ const Customers = () => {
             return (
               <tr>
                 <td>{customer.id}</td>
-                <td>{customer.first_name}</td>
+                <td>{customer.last_name}</td>
                 <td>{customer.email}</td>
               </tr>
             );

@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 
 // Type for the customer (adjust based on your API structure)
 type Customer = {
@@ -6,66 +6,78 @@ type Customer = {
   first_name: string;
   last_name: string;
   email: string;
+  phone: string;
 };
 
 type Props = {
-  handleSelectedCustomer: (customer: any) => void;
+  handleSelectedCustomer: (customer: Customer | 'noCustomer') => void;
 };
 
 const CustomerSearch = ({ handleSelectedCustomer }: Props) => {
   const [search, setSearch] = useState('');
-  const [customers, setCustomers] = useState<Customer[]>([]);
-
   const [isLoading, setIsLoading] = useState(false);
-  const debounceTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const [exactMatchCustomer, setExactMatchCustomer] = useState<Customer | null>(
+    null,
+  );
+  const [statusMessage, setStatusMessage] = useState<string | null>(null);
 
-  // Fetch customers from backend
-  useEffect(() => {
-    const fetchCustomers = async (query: string) => {
-      if (!query) return; // Don't make an API call if the query is empty
-      setIsLoading(true);
-
-      try {
-        const response = await fetch(
-          `http://127.0.0.1:8000/api/customers/list?search=${query}`,
-        );
-        const resp = await response.json();
-        setCustomers(resp?.data);
-      } catch (error) {
-        console.error('Error fetching customers:', error);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-
-    if (search) {
-      fetchCustomers(search);
-    } else {
-      setCustomers([]); // Clear customers when search is empty
+  const fetchCustomer = async (query: string) => {
+    if (!query) {
+      setExactMatchCustomer(null); // Clear result if search is empty
+      setStatusMessage(null);
+      return;
     }
-  }, [search]);
+    setIsLoading(true);
 
-  // Debounce function to delay search calls
-  function debounce(cb: (...args: any[]) => void, delay: number) {
-    return (...args: any[]) => {
-      if (debounceTimer.current) {
-        clearTimeout(debounceTimer.current);
+    try {
+      const response = await fetch(
+        `http://127.0.0.1:8000/api/customers/list?search=${query}`,
+      );
+      const resp = await response.json();
+
+      // Check for exact match based on the search query
+      const exactMatch = resp?.data?.find(
+        (customer: Customer) =>
+          customer.first_name.toLowerCase() === query.toLowerCase() ||
+          customer.last_name.toLowerCase() === query.toLowerCase() ||
+          customer.email.toLowerCase() === query.toLowerCase() ||
+          customer.phone === query, // Phone number is matched as-is (no transformation)
+      );
+
+      if (exactMatch) {
+        setExactMatchCustomer(exactMatch);
+        setStatusMessage('Customer found! Redirecting to the next step...');
+
+        // Delay redirection by 3 seconds
+        setTimeout(() => {
+          handleSelectedCustomer(exactMatch);
+          setStatusMessage(null);
+        }, 3000);
+      } else {
+        setExactMatchCustomer(null);
+        setStatusMessage(
+          'No customer found. Redirecting to create new customer...',
+        );
+
+        // Delay redirection by 3 seconds
+        setTimeout(() => {
+          handleSelectedCustomer('noCustomer');
+          setStatusMessage(null);
+        }, 3000);
       }
-      debounceTimer.current = setTimeout(() => {
-        cb(...args);
-      }, delay);
-    };
-  }
-
-  // Handle search input
-  const handleSearch = (value: string) => {
-    setSearch(value);
+    } catch (error) {
+      console.error('Error fetching customers:', error);
+      setStatusMessage('Error fetching customer data. Please try again.');
+    } finally {
+      setIsLoading(false);
+    }
   };
 
-  // Handle selecting a customer from the list
-  const handleSelectCustomer = (customer: Customer) => {
-    handleSelectedCustomer(customer);
-    setSearch(`${customer.first_name} ${customer.last_name}`); // Update the search field
+  const handleSearchSubmit = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') {
+      e.preventDefault(); // Prevent form submission or default behavior
+      fetchCustomer(search); // Perform the search explicitly
+    }
   };
 
   return (
@@ -74,34 +86,46 @@ const CustomerSearch = ({ handleSelectedCustomer }: Props) => {
         <input
           type="search"
           className="px-2 py-1 rounded w-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
-          placeholder="Search for a customer..."
-          onChange={(e) => handleSearch((e.target as HTMLInputElement).value)}
+          placeholder="Search by email or phone number..."
+          onChange={(e) => setSearch(e.target.value)}
+          onKeyDown={handleSearchSubmit} // Listen for Enter key
           value={search}
         />
-        {search && (
-          <>
-            <span>|</span>
-            <button
-              className="border px-1 rounded hover:bg-gray-200"
-              onClick={() => handleSelectedCustomer('noCustomer')}
-            >
-              Create
-            </button>
-          </>
-        )}
+        {isLoading && <p>Loading...</p>}
       </div>
-      {isLoading && <p>Loading...</p>}
-      <ul className="mt-4 text-gray-600">
-        {customers.map((customer) => (
-          <li
-            key={customer.id}
-            className="px-2 py-1 hover:bg-gray-200 cursor-pointer"
-            onClick={() => handleSelectCustomer(customer)}
+
+      {statusMessage && (
+        <div
+          className={`mt-4 p-2 border rounded ${
+            exactMatchCustomer
+              ? 'border-green-400 bg-green-100'
+              : 'border-red-400 bg-red-100'
+          }`}
+        >
+          <p
+            className={`${
+              exactMatchCustomer ? 'text-green-700' : 'text-red-700'
+            }`}
           >
-            {customer.first_name} {customer.last_name}
-          </li>
-        ))}
-      </ul>
+            <strong>{statusMessage}</strong>
+          </p>
+        </div>
+      )}
+
+      {exactMatchCustomer && (
+        <div className="mt-4 p-2 border border-gray-300 rounded bg-gray-100">
+          <p>
+            <strong>Name:</strong> {exactMatchCustomer.first_name}{' '}
+            {exactMatchCustomer.last_name}
+          </p>
+          <p>
+            <strong>Email:</strong> {exactMatchCustomer.email}
+          </p>
+          <p>
+            <strong>Phone:</strong> {exactMatchCustomer.phone}
+          </p>
+        </div>
+      )}
     </div>
   );
 };

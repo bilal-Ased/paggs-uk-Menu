@@ -6,13 +6,14 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import FirstForm from './FirstForm';
 import { SecondForm } from './SecondForm';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import ThirdForm from './ThirdForm';
+
 const steps = ['Enter your information', 'Booking Details', 'Confirmation'];
 
 export default function HorizontalLinearStepper() {
   const [activeStep, setActiveStep] = useState(0);
   const [skipped, setSkipped] = useState(new Set<number>());
-
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
@@ -20,16 +21,21 @@ export default function HorizontalLinearStepper() {
     phone: '',
   });
 
-  const [errors, setErrors] = useState({});
-  const [customer, setCustomer] = useState(undefined);
+  useEffect(() => {
+    if (activeStep === 2) {
+      const timer = setTimeout(() => {
+        setActiveStep(0); // Reset to step 1
+      }, 10000); // 40 seconds
 
-  const isStepOptional = (step: number) => {
-    return step === 1;
-  };
+      return () => clearTimeout(timer); // Cleanup timer
+    }
+  }, [activeStep]);
 
-  const isStepSkipped = (step: number) => {
-    return skipped.has(step);
-  };
+  const [customer, setCustomer] = useState<any>(undefined);
+  const [bookingDetails, setBookingDetails] = useState<any>(undefined); // Store booking details after step 2
+
+  const isStepOptional = (step: number) => step === 1;
+  const isStepSkipped = (step: number) => skipped.has(step);
 
   const handleNext = () => {
     let newSkipped = skipped;
@@ -37,7 +43,6 @@ export default function HorizontalLinearStepper() {
       newSkipped = new Set(newSkipped.values());
       newSkipped.delete(activeStep);
     }
-
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
     setSkipped(newSkipped);
   };
@@ -48,11 +53,8 @@ export default function HorizontalLinearStepper() {
 
   const handleSkip = () => {
     if (!isStepOptional(activeStep)) {
-      // You probably want to guard against something like this,
-      // it should never occur unless someone's actively trying to break something.
       throw new Error("You can't skip a step that isn't optional.");
     }
-
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
     setSkipped((prevSkipped) => {
       const newSkipped = new Set(prevSkipped.values());
@@ -71,14 +73,19 @@ export default function HorizontalLinearStepper() {
       handleNext();
     }
   };
+
+  const onBookingSuccess = (bookingDetails: any) => {
+    // Update booking details and move to step 3
+    setBookingDetails(bookingDetails);
+    handleNext();
+  };
+
   return (
     <Box sx={{ width: '80%', marginInline: '3rem', marginTop: '2rem' }}>
       <Stepper activeStep={activeStep}>
         {steps.map((label, index) => {
           const stepProps: { completed?: boolean } = {};
-          const labelProps: {
-            optional?: React.ReactNode;
-          } = {};
+          const labelProps: { optional?: React.ReactNode } = {};
           if (isStepOptional(index)) {
             labelProps.optional = (
               <Typography variant="caption">Optional</Typography>
@@ -97,7 +104,7 @@ export default function HorizontalLinearStepper() {
       {activeStep === steps.length ? (
         <React.Fragment>
           <Typography sx={{ mt: 2, mb: 1 }}>
-            All steps completed - you&apos;re finished
+            All steps completed - you're finished
           </Typography>
           <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
             <Box sx={{ flex: '1 1 auto' }} />
@@ -107,9 +114,16 @@ export default function HorizontalLinearStepper() {
       ) : (
         <React.Fragment>
           {activeStep === 0 && <FirstForm onSuccess={onSuccess} />}
-          {activeStep === 1 && <SecondForm customer={customer} />}
-          {/* <Typography sx={{ mt: 2, mb: 1 }}>Step {activeStep + 1}</Typography> */}
-          <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
+          {activeStep === 1 && (
+            <SecondForm
+              customer={customer}
+              onBookingSuccess={onBookingSuccess}
+            />
+          )}
+          {activeStep === 2 && (
+            <ThirdForm customer={customer} bookingDetails={bookingDetails} />
+          )}
+          <Box sx={{ display: 'none', flexDirection: 'row', pt: 2 }}>
             <Button
               color="inherit"
               disabled={activeStep === 0}

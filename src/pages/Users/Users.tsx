@@ -1,24 +1,22 @@
 import { useEffect, useState } from 'react';
-import './styles.css';
 import Pagination from '../../components/Pagination';
 import SimpleLoader from '../../components/SimpleLoader';
 import Message from '../../components/Message';
 import Avatar from '../../components/Avatar';
-import Breadcrumb from '../../components/Breadcrumb';
 
-const Customers = () => {
+const Users = () => {
   const [data, setData] = useState([]);
   const [metaData, setMetaData] = useState(null);
   const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState('');
-  const [sortField, setSortField] = useState('id'); // default sort by id
+  const [sortField, setSortField] = useState('name'); // default sort by name
   const [sortOrder, setSortOrder] = useState('asc'); // default sort order
 
   useEffect(() => {
     setLoading(true);
     fetch(
-      `http://127.0.0.1:8000/api/customers/table?page=${page}&search=${searchTerm}&sort=${sortField}&order=${sortOrder}`,
+      `http://127.0.0.1:8000/api/users/list?page=${page}&search=${searchTerm}&sort=${sortField}&order=${sortOrder}`,
     )
       .then((res) => res.json())
       .then((rawData) => {
@@ -52,9 +50,6 @@ const Customers = () => {
 
   return (
     <div>
-
-<Breadcrumb pageName="Customers" />
-
       <input
         type="text"
         placeholder="Search customers..."
@@ -78,29 +73,18 @@ const Customers = () => {
                   </label>
                 </div>
               </th>
-              <th scope="col" className="px-6 py-3">
+              <th scope="col" className="px-4 py-3"> {/* Reduced padding here */}
                 <button
-                  onClick={() => handleSort('id')}
-                  className="focus:outline-none"
-                >
-                  ID
-                </button>
-              </th>
-              <th scope="col" className="px-6 py-3">
-                <button
-                  onClick={() => handleSort('first_name')}
+                  onClick={() => handleSort('name')}
                   className="focus:outline-none"
                 >
                   Name
                 </button>
               </th>
-              <th scope="col" className="px-6 py-3">
+              <th scope="col" className="px-4 py-3"> {/* Reduced padding here */}
                 Email
               </th>
-              <th scope="col" className="px-6 py-3">
-                Phone Number
-              </th>
-              <th scope="col" className="px-6 py-3">
+              <th scope="col" className="px-4 py-3"> {/* Reduced padding here */}
                 Action
               </th>
             </tr>
@@ -108,62 +92,55 @@ const Customers = () => {
           <tbody>
             {!loading ? (
               data.length > 0 ? (
-                data.map((item) =>
-                  
-                  {
+                data.map((item) => {
+                  const fullName = `${item.name}`;
 
-const fullName = `${item.first_name} ${item.last_name}`
-
-
-return   (
-  <tr
-    className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
-    key={item.id} // Corrected from `key={item.id}`
-  >
-    <td className="w-4 p-4">
-      <div className="flex items-center">
-        <input
-          id={`checkbox-table-search-${item.id}`} // Corrected to make checkboxes unique
-          type="checkbox"
-          className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
-        />
-        <label
-          htmlFor={`checkbox-table-search-${item.id}`} // Corrected to match unique ID
-          className="sr-only"
-        >
-          checkbox
-        </label>
-      </div>
-    </td>
-    <td className="px-6 py-4">{item.id}</td>
-    <td className="px-6 py-4">
-     <div className="flex gap-2 items-center">
-     <Avatar name={fullName}/>
-     {fullName}
-     </div>
-    </td>
-    <td className="px-6 py-4">{item.email}</td>
-    <td className="px-6 py-4">{item.phone_number}</td>
-    <td className="flex items-center px-6 py-4">
-      <a
-        href="#"
-        className="font-medium text-blue-600 dark:text-blue-500 hover:underline"
-      >
-        Edit
-      </a>
-      <a
-        href="#"
-        className="font-medium text-red-600 dark:text-red-500 hover:underline ms-3"
-      >
-        Remove
-      </a>
-    </td>
-  </tr>
-)
-
-                  }  
-                  
-                )
+                  return (
+                    <tr
+                      className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
+                      key={item.id} // Corrected from `key={item.id}`
+                    >
+                      <td className="w-4 p-4">
+                        <div className="flex items-center">
+                          <input
+                            id={`checkbox-table-search-${item.name}`} // Changed ID to the user's name for uniqueness
+                            type="checkbox"
+                            className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                          />
+                          <label
+                            htmlFor={`checkbox-table-search-${item.name}`} // Changed to match unique name-based ID
+                            className="sr-only"
+                          >
+                            checkbox
+                          </label>
+                        </div>
+                      </td>
+                      <td className="px-4 py-4"> {/* Reduced padding here */}
+                        <div className="flex gap-2 items-center">
+                          <Avatar name={fullName} />
+                          {fullName}
+                        </div>
+                      </td>
+                      <td className="px-4 py-4"> {/* Reduced padding here */}
+                        {item.email}
+                      </td>
+                      <td className="flex items-center px-4 py-4"> {/* Reduced padding here */}
+                        <a
+                          href="#"
+                          className="font-medium text-blue-600 dark:text-blue-500 hover:underline"
+                        >
+                          Edit
+                        </a>
+                        <a
+                          href="#"
+                          className="font-medium text-red-600 dark:text-red-500 hover:underline ms-3"
+                        >
+                          Remove
+                        </a>
+                      </td>
+                    </tr>
+                  );
+                })
               ) : (
                 <tr>
                   <td colSpan={4}>
@@ -196,4 +173,4 @@ return   (
   );
 };
 
-export default Customers;
+export default Users;
