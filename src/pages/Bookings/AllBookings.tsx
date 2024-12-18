@@ -165,7 +165,7 @@ const AllBookings = () => {
                     </td>
                     <td className="px-6 py-4">{item.date}</td>
                     <td className="px-6 py-4">{item.time}</td>
-                    <td className="px-6 py-4">{item.status.name}</td>
+                    <td className="px-6 py-4">{item?.status?.name?? null}</td>
                     <td className="flex items-center px-6 py-4">
                       <a
                         href="#"

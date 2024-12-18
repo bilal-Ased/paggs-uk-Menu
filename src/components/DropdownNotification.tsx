@@ -79,10 +79,9 @@ const DropdownNotification = () => {
             >
               <p className="text-sm">
                 <span className="text-black dark:text-white">
-                  Table your information in a swipe
+                  lorem 12
                 </span>{' '}
-                Sint occaecat cupidatat non proident, sunt in culpa qui officia
-                deserunt mollit anim.
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Suscipit quo accusantium voluptatem!
               </p>
 
               <p className="text-xs">12 May, 2025</p>

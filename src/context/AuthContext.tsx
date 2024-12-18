@@ -1,3 +1,4 @@
+import { CircularProgress } from '@mui/material';
 import React, {
   createContext,
   useState,
@@ -5,6 +6,7 @@ import React, {
   useEffect,
   ReactNode,
 } from 'react';
+import Loader from '../common/Loader';
 
 interface AuthContextType {
   isAuthenticated: boolean;
@@ -73,7 +75,8 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
   if (isLoading) {
     // Optionally, show a loading spinner or some kind of indicator while loading
-    return <div>Loading...</div>;
+    return <div><Loader/></div>
+    
   }
 
   return (

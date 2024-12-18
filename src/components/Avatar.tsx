@@ -1,17 +1,16 @@
-
 type Props = {
   name: string;
+  size?: string; // Pass size directly as Tailwind's spacing class (e.g., "8", "12")
 };
 
- function stringAvatar(name:string) {
-    const initials = name
-      .split(' ')
-      .map(word => word[0])
-      .join('')
-      .toUpperCase();
-    return initials;
-  }
-  
+function stringAvatar(name: string) {
+  const initials = name
+    .split(' ')
+    .map(word => word[0])
+    .join('')
+    .toUpperCase();
+  return initials;
+}
 
 const getAvatarColor = (name: string) => {
   const colors = [
@@ -25,8 +24,8 @@ const getAvatarColor = (name: string) => {
     'bg-teal-500',
     'bg-orange-500',
   ];
-  
-  // Generate a number from the name to consistently pick a color
+
+  // Generate a consistent color index based on the name
   const index = name
     .toLowerCase()
     .split('')
@@ -35,13 +34,13 @@ const getAvatarColor = (name: string) => {
   return colors[index];
 };
 
-const Avatar = ({ name }: Props) => {
+const Avatar = ({ name, size = "8" }: Props) => {
   const initials = stringAvatar(name);
   const color = getAvatarColor(name);
 
   return (
     <div
-      className={`flex items-center justify-center w-8 h-8 rounded-full ${color} text-white text-md font-bold`}
+      className={`flex items-center justify-center rounded-full ${color} text-white text-md font-bold w-${size} h-${size}`}
     >
       {initials}
     </div>
