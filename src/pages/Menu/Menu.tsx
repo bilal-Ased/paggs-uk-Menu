@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import './Menu.css';
+import { BsAlignStart } from 'react-icons/bs';
+import { Link } from 'react-router-dom';
 
 const aLaCarteMenu = [
   {
@@ -268,11 +270,21 @@ const Menu = () => {
             £25
           </p>
         </div>
+        <div className="booknow text-left">
 
+        <Link
+            to="/bookings"
+            className="block text-gray-500 hover:underline"
+          >
+           Click Here Book Now
+          </Link>
+
+        </div>
         <div className="dropdown-container">
           <label className="dropdown-label" htmlFor="menuSectionDropdown">
             Select Menu Section:
           </label>
+          
           <select
             id="menuSectionDropdown"
             className="styled-dropdown"
