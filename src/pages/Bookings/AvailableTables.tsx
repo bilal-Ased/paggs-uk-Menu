@@ -78,7 +78,7 @@ const AvailableTables = () => {
     e.preventDefault();
     try {
       const response = await axios.post(
-        `${app.urls.be}/api/bookings/available-tables/store`,
+        `${app.urls.be}api/bookings/available-tables/store`,
         formData
       );
       setAvailableTables(response.data);
