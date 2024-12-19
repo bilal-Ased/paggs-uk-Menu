@@ -90,8 +90,8 @@ const Settings = () => {
                           type="text"
                           name="fullName"
                           id="fullName"
-                          placeholder="Devid Jhon"
-                          defaultValue="Devid Jhon"
+                          placeholder="Bilal Mughal"
+                          defaultValue="Bilal"
                         />
                       </div>
                     </div>
@@ -170,7 +170,7 @@ const Settings = () => {
                       type="text"
                       name="Username"
                       id="Username"
-                      placeholder="devidjhon24"
+                      placeholder="bilal"
                       defaultValue="devidjhon24"
                     />
                   </div>
