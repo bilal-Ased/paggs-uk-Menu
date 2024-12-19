@@ -39,7 +39,7 @@ const AvailableTables = () => {
 
   const fetchTables = async () => {
     try {
-      const response = await axios.get(`${app.urls.be}/api/bookings/available-tables`);
+      const response = await axios.get(`${app.urls.be}api/bookings/available-tables`);
       setAvailableTables(response.data);
       setFormData({
         total: response.data.total,
