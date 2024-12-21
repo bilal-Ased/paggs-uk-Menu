@@ -78,7 +78,7 @@ function CreateCustomerForm({ handleSelectedCustomer }: Props) {
         <div className="bg-gray-50 p-6 rounded-lg shadow-inner border border-gray-200 mb-8">
           <h2 className="text-xl font-medium text-gray-800 mb-4">Important Information:</h2>
           <ul className="list-disc list-inside text-gray-700">
-            <li>Reservations require card details for confirmation.</li>
+            <li>Reservations require card details for confirmation for more then 10 People.</li>
             <li>
               Cancellations with less than{' '}
               <span className="text-red-500 font-semibold">24 hours’ notice</span> may incur a charge of{' '}
