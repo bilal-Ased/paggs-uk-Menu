@@ -70,9 +70,9 @@ function CreateCustomerForm({ handleSelectedCustomer }: Props) {
   return (
     <form onSubmit={handleFormSubmit}>
       <div className=" mx-auto p-8 bg-white  shadow-lg border border-gray-200">
-        <h1 className="text-4xl font-extrabold text-gray-900 text-center mb-8">Welcome to Il Pagliaccio</h1>
+        <h1 className="text-4xl font-extrabold text-gray-900 text-center mb-8">Welcome to Pagliaccio</h1>
         <p className="text-lg text-gray-700 leading-relaxed mb-6 text-center">
-          At <span className="font-semibold italic text-gray-900">Il Pagliaccio</span>, we offer a memorable dining experience. Please fill out the form to secure your reservation.
+          At <span className="font-semibold italic text-gray-900">Pagliaccio</span>, we offer a memorable dining experience. Please fill out the form to secure your reservation.
         </p>
 
         <div className="bg-gray-50 p-6 rounded-lg shadow-inner border border-gray-200 mb-8">
