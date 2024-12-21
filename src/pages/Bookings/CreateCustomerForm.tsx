@@ -69,78 +69,97 @@ function CreateCustomerForm({ handleSelectedCustomer }: Props) {
 
   return (
     <form onSubmit={handleFormSubmit}>
-      <div className="p-6.5">
+      <div className=" mx-auto p-8 bg-white  shadow-lg border border-gray-200">
+        <h1 className="text-4xl font-extrabold text-gray-900 text-center mb-8">Welcome to Il Pagliaccio</h1>
+        <p className="text-lg text-gray-700 leading-relaxed mb-6 text-center">
+          At <span className="font-semibold italic text-gray-900">Il Pagliaccio</span>, we offer a memorable dining experience. Please fill out the form to secure your reservation.
+        </p>
+
+        <div className="bg-gray-50 p-6 rounded-lg shadow-inner border border-gray-200 mb-8">
+          <h2 className="text-xl font-medium text-gray-800 mb-4">Important Information:</h2>
+          <ul className="list-disc list-inside text-gray-700">
+            <li>Reservations require card details for confirmation.</li>
+            <li>
+              Cancellations with less than{' '}
+              <span className="text-red-500 font-semibold">24 hours’ notice</span> may incur a charge of{' '}
+              <span className="font-semibold text-gray-800">£5 per guest</span>.
+            </li>
+            <li>Terrace seating is subject to availability.</li>
+          </ul>
+        </div>
+
         {successMessage && (
-          <div className="p-3 mb-4 text-green-600 bg-green-100 rounded">
+          <div className="p-4 mb-6 text-green-700 bg-green-100 rounded-lg">
             {successMessage}
           </div>
         )}
         {errors.server && (
-          <div className="p-3 mb-4 text-red-600 bg-red-100 rounded">
+          <div className="p-4 mb-6 text-red-700 bg-red-100 rounded-lg">
             {errors.server}
           </div>
         )}
-        <div className="mb-4.5 flex flex-col gap-6 xl:flex-row">
+
+        <div className="mb-6 flex flex-col gap-6 xl:flex-row">
           <div className="w-full xl:w-1/2">
-            <label className="mb-2.5 block text-black dark:text-white">
-              First name <span className="text-meta-1">*</span>
+            <label className="mb-2.5 block text-gray-800 font-semibold">
+              First Name <span className="text-red-500">*</span>
             </label>
             <input
               value={formData.firstName}
               onChange={(e) => handleFormChange(e, 'firstName')}
               type="text"
               placeholder="Enter your first name"
-              className="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary"
+              className="w-full rounded border-gray-300 py-3 px-4 text-gray-700 focus:border-blue-500 focus:ring-2 focus:ring-blue-500"
             />
             <RenderErrorMessage error={errors.first_name} />
           </div>
-
           <div className="w-full xl:w-1/2">
-            <label className="mb-2.5 block text-black dark:text-white">
-              Last name
+            <label className="mb-2.5 block text-gray-800 font-semibold">
+              Last Name
             </label>
             <input
               value={formData.lastName}
               onChange={(e) => handleFormChange(e, 'lastName')}
               type="text"
               placeholder="Enter your last name"
-              className="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary"
+              className="w-full rounded border-gray-300 py-3 px-4 text-gray-700 focus:border-blue-500 focus:ring-2 focus:ring-blue-500"
             />
           </div>
         </div>
 
-        <div className="mb-4.5 flex flex-col gap-6 xl:flex-row">
+        <div className="mb-6 flex flex-col gap-6 xl:flex-row">
           <div className="w-full xl:w-1/2">
-            <label className="mb-2.5 block text-black dark:text-white">
-              Email <span className="text-meta-1">*</span>
+            <label className="mb-2.5 block text-gray-800 font-semibold">
+              Email <span className="text-red-500">*</span>
             </label>
             <input
               value={formData.email}
               onChange={(e) => handleFormChange(e, 'email')}
               type="email"
-              placeholder="Enter your Email Address"
-              className="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary"
+              placeholder="Enter your email address"
+              className="w-full rounded border-gray-300 py-3 px-4 text-gray-700 focus:border-blue-500 focus:ring-2 focus:ring-blue-500"
             />
             <RenderErrorMessage error={errors.email} />
           </div>
-
           <div className="w-full xl:w-1/2">
-            <label className="mb-2.5 block text-black dark:text-white">
-              Phone <span className="text-meta-1">*</span>
+            <label className="mb-2.5 block text-gray-800 font-semibold">
+              Phone <span className="text-red-500">*</span>
             </label>
             <input
               value={formData.phone}
               onChange={(e) => handleFormChange(e, 'phone')}
               type="text"
-              placeholder="Enter your Phone Number"
-              className="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary"
+              placeholder="Enter your phone number"
+              className="w-full rounded border-gray-300 py-3 px-4 text-gray-700 focus:border-blue-500 focus:ring-2 focus:ring-blue-500"
             />
             <RenderErrorMessage error={errors.phone_number} />
           </div>
         </div>
-        <div className="flex justify-end">
+
+        <div className="flex justify-center mt-8">
           <button
-            className="justify-center rounded bg-primary p-3 font-medium text-white"
+            type="submit"
+            className="rounded bg-blue-600 text-white py-3 px-6 font-semibold hover:bg-blue-700 focus:ring-2 focus:ring-blue-500 transition duration-300"
             disabled={isSubmitting}
           >
             {isSubmitting ? 'Submitting...' : 'Submit'}
@@ -152,9 +171,7 @@ function CreateCustomerForm({ handleSelectedCustomer }: Props) {
 }
 
 const RenderErrorMessage = ({ error }) => {
-  return error ? (
-    <small className="text-meta-1 text-red-500">{error}</small>
-  ) : null;
+  return error ? <small className="text-red-500">{error}</small> : null;
 };
 
 export default CreateCustomerForm;
