@@ -27,6 +27,7 @@ import Checkout from './pages/Stripe/Checkout';
 import Users from './pages/Users/Users';
 import { loadStripe } from '@stripe/stripe-js';
 import Stripe from './components/Stripe';
+import NotFound from './pages/Error-Pages/NotFound';
 
 
 // Make sure to call `loadStripe` outside of a component’s render to avoid
@@ -72,7 +73,9 @@ function App() {
             <Route path="/profile" element={<Profile />} />
             <Route path="/users" element={<Users />} />
 
+
           </Route>
+            <Route path="*" element={<NotFound />} />
         </Route>
       </Routes>
     </AuthProvider>
