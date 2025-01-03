@@ -94,8 +94,8 @@ const aLaCarteMenu = [
     ],
   },
   {
-    section: 'Vitello',
-    title: 'Vitello',
+    section: 'Veal',
+    title: 'Veal',
     items: [
       {
         name: 'Vitello al Gorgonzola',
@@ -118,8 +118,8 @@ const aLaCarteMenu = [
     ],
   },
   {
-    section: 'Bistecca',
-    title: 'Bistecca',
+    section: 'Steak',
+    title: 'Steak',
     items: [
       {
         name: 'Tagliata di Manzo',
@@ -136,8 +136,8 @@ const aLaCarteMenu = [
     ],
   },
   {
-    section: 'Pesce',
-    title: 'Pesce',
+    section: 'Fish',
+    title: 'Fish',
     items: [
       {
         name: 'Salmone Grigliato',
@@ -273,11 +273,16 @@ const Menu = () => {
         <div className="booknow text-left">
 
         <Link
-            to="/bookings"
-            className="block text-gray-500 hover:underline"
-          >
-           Click Here Book Now
-          </Link>
+  to="/bookings"
+  className="inline-block bg-[rgb(178,157,121)] text-white font-medium py-1 px-6 rounded-md border-1 border-transparent transition-all duration-300 ease-in-out hover:bg-[rgb(160,140,105)] hover:shadow-md"
+>
+  Book Now
+</Link>
+
+
+
+
+
 
         </div>
         <div className="dropdown-container">
