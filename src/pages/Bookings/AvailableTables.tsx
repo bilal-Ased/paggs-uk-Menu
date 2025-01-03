@@ -74,12 +74,16 @@ const AvailableTables = () => {
     });
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    const payload = {
+      total: formData.total,
+      in_use: formData.inUse, // Use `in_use` as the key to match Laravel's expectation
+    };
     try {
       const response = await axios.post(
         `${app.urls.be}api/bookings/available-tables/store`,
-        formData
+        payload
       );
       setAvailableTables(response.data);
       showModal("Data updated successfully.", false);
@@ -87,6 +91,7 @@ const AvailableTables = () => {
       showModal("Failed to update data.", true);
     }
   };
+  
 
   return (
     <div className="max-w-md mx-auto p-6 bg-white rounded-lg shadow-lg">
