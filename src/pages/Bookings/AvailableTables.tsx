@@ -40,15 +40,25 @@ const AvailableTables = () => {
   const fetchTables = async () => {
     try {
       const response = await axios.get(`${app.urls.be}api/bookings/available-tables`);
-      setAvailableTables(response.data);
+      
+      console.log(response.data); // To check the response data structure
+      
+      // Map 'in_use' from the backend to 'inUse' for React state
+      setAvailableTables({
+        total: response.data.total,
+        inUse: response.data.in_use, // Ensure you're using 'in_use' from the backend response
+      });
+  
       setFormData({
         total: response.data.total,
-        inUse: response.data.inUse,
+        inUse: response.data.in_use, // Map correctly here too
       });
     } catch (error) {
       showModal("Failed to fetch table data.", true);
     }
   };
+  
+  
 
   const handleCreate = () => {
     showModal("Table creation functionality is coming soon.", false);
