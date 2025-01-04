@@ -59,20 +59,17 @@ export const SecondForm = ({ customer, onBookingSuccess }: Props) => {
 
       if (response.ok) {
         const data = await response.json();
-
         onBookingSuccess(data?.booking);
       } else {
-        setValidationErrors([
-          'Error submitting booking. Please try again later.',
-        ]);
+        const errorData = await response.json();
+        setValidationErrors([errorData?.message || 'Error submitting booking. Please try again later.']);
       }
     } catch (error) {
       console.error('Error submitting booking:', error);
-      setValidationErrors([
-        'Error submitting booking. Please try again later.',
-      ]);
+      setValidationErrors(['Error submitting booking. Please try again later.']);
     }
   };
+
 
   return (
     <>
@@ -112,7 +109,7 @@ export const SecondForm = ({ customer, onBookingSuccess }: Props) => {
                     <div className="relative">
                       <input
                         type="time"
-                        className="custom-input-date custom-input-date-1 w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
+                        className="custom-input-time custom-input-time-1 w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
                         value={time}
                         onChange={(e) => setTime(e.target.value)}
                         required
@@ -127,7 +124,7 @@ export const SecondForm = ({ customer, onBookingSuccess }: Props) => {
                     <label className="mb-2.5 block text-black dark:text-white">
                       Persons <span className="text-meta-1">*</span>
                     </label>
-                    
+
                     <select
                       className="relative z-20 w-full appearance-none rounded border border-stroke bg-transparent py-3 px-12 outline-none transition focus:border-primary active:border-primary dark:border-form-strokedark dark:bg-form-input"
                       value={persons}
@@ -172,6 +169,7 @@ export const SecondForm = ({ customer, onBookingSuccess }: Props) => {
                     </ul>
                   </div>
                 )}
+
 
                 {/* Submit Button */}
                 <div className="flex justify-end">
