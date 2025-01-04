@@ -70,7 +70,7 @@ const AvailableTables = () => {
     if (window.Echo) {
       window.Echo.channel("available-tables")
         .listen("TableDataUpdated", (event) => {
-          console.log("Real-time update:", event);
+          console.log("Real-time update received:", event);
           setAvailableTables({
             total: event.total,
             inUse: event.in_use,

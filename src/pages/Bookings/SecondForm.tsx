@@ -21,11 +21,15 @@ export const SecondForm = ({ customer, onBookingSuccess }: Props) => {
   // State and errors
   const [validationErrors, setValidationErrors] = useState<string[]>([]);
 
+  // Loading state
+  const [loading, setLoading] = useState(false);
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
     // Reset errors before each submit
     setValidationErrors([]);
+    setLoading(true);  // Start loading
 
     // Form validation
     const errors: string[] = [];
@@ -35,6 +39,7 @@ export const SecondForm = ({ customer, onBookingSuccess }: Props) => {
 
     if (errors.length > 0) {
       setValidationErrors(errors);
+      setLoading(false);  // Stop loading on error
       return;
     }
 
@@ -67,9 +72,10 @@ export const SecondForm = ({ customer, onBookingSuccess }: Props) => {
     } catch (error) {
       console.error('Error submitting booking:', error);
       setValidationErrors(['Error submitting booking. Please try again later.']);
+    } finally {
+      setLoading(false);  // Stop loading when done
     }
   };
-
 
   return (
     <>
@@ -170,14 +176,19 @@ export const SecondForm = ({ customer, onBookingSuccess }: Props) => {
                   </div>
                 )}
 
-
-                {/* Submit Button */}
+                {/* Submit Button with Loading Effect */}
                 <div className="flex justify-end">
                   <button
                     type="submit"
-                    className="justify-center rounded bg-primary p-3 font-medium text-white"
+                    className="justify-center rounded bg-primary p-3 font-medium text-white flex items-center"
+                    disabled={loading} // Disable button when loading
                   >
-                    Submit
+                    {loading ? (
+                      <div className="animate-spin border-2 border-t-2 border-white rounded-full w-5 h-5 mr-2" />
+                    ) : (
+                      'Submit'
+                    )}
+                    {loading ? 'Submitting...' : ''}
                   </button>
                 </div>
               </div>
