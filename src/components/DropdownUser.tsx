@@ -46,12 +46,12 @@ const DropdownUser = () => {
 
   const handleLogout = async () => {
     try {
-      // Call backend logout API to revoke token
-      await axios.post(`${app.urls.be}/api/logout`, {}, {
+      await axios.post(`${app.urls.be}api/logout`, {}, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem('authToken')}`
         }
       });
+
 
       localStorage.removeItem('authToken');
 

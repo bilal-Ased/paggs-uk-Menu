@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
-import LogoDark from '../../images/logo/logo-dark.svg';
-import Logo from '../../images/logo/logo.svg';
+import LogoDark from '../../images/logo/logo.jpg';
+import Logo from '../../images/logo/logo.jpg';
 import React, { useState } from 'react';
 
 const SignIn = () => {
@@ -232,9 +232,8 @@ const SignIn = () => {
 
                 <button
                   type="submit"
-                  className={`w-full py-2 px-4 rounded-md bg-blue-500 text-white ${
-                    loading ? 'opacity-50' : ''
-                  }`}
+                  className={`w-full py-2 px-4 rounded-md bg-blue-500 text-white ${loading ? 'opacity-50' : ''
+                    }`}
                   disabled={loading}
                 >
                   {loading ? 'Logging in...' : 'Log In'}
