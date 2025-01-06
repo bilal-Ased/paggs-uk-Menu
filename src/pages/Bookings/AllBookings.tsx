@@ -64,15 +64,15 @@ const AllBookings = () => {
   return (
     <div>
       <div className="flex space-x-4">
-      <Breadcrumb pageName="Bookings" />
+        <Breadcrumb pageName="Bookings" />
 
-      <input
-        type="text"
-        placeholder="Search Bookings..."
-        value={searchTerm}
-        onChange={handleSearch}
-        className="mb-4 p-2 border rounded w-64"
-      />
+        <input
+          type="text"
+          placeholder="Search Bookings..."
+          value={searchTerm}
+          onChange={handleSearch}
+          className="mb-4 p-2 border rounded w-64"
+        />
         <input
           type="date"
           value={fromDate}
@@ -118,7 +118,7 @@ const AllBookings = () => {
                   onClick={() => handleSort('first_name')}
                   className="focus:outline-none"
                 >
-                  Customer Name 
+                  Customer Name
                 </button>
               </th>
               <th scope="col" className="px-6 py-3">
@@ -160,12 +160,13 @@ const AllBookings = () => {
                     </td>
                     <td className="px-6 py-4">{item.id}</td>
                     <td className="px-6 py-4">
-                      
+
                       {`${item.customer.first_name} ${item.customer.last_name}`}
                     </td>
                     <td className="px-6 py-4">{item.date}</td>
                     <td className="px-6 py-4">{item.time}</td>
-                    <td className="px-6 py-4">{item?.status?.name?? null}</td>
+                    {/* <td className="px-6 py-4">{item.status}</td> */}
+                    <td className="px-6 py-4">{item?.status?.name ?? 'No Status'}</td>
                     <td className="flex items-center px-6 py-4">
                       <a
                         href="#"

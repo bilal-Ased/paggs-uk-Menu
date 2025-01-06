@@ -13,8 +13,8 @@ const DropdownUser = () => {
   const trigger = useRef<any>(null);
   const dropdown = useRef<any>(null);
 
-  const navigate =  useNavigate()
-  const {user} =  useAuth()
+  const navigate = useNavigate()
+  const { user } = useAuth()
 
   // close on click outside
   useEffect(() => {
@@ -43,7 +43,7 @@ const DropdownUser = () => {
   });
 
 
-  
+
   const handleLogout = async () => {
     try {
       // Call backend logout API to revoke token
@@ -52,11 +52,11 @@ const DropdownUser = () => {
           Authorization: `Bearer ${localStorage.getItem('authToken')}`
         }
       });
-  
+
       localStorage.removeItem('authToken');
-  
+
       navigate('/auth/signin');
-    } catch (error:any) {
+    } catch (error: any) {
       console.error('Logout failed:', error.response?.data || error.message);
     }
 
@@ -75,20 +75,19 @@ const DropdownUser = () => {
         <span className="hidden text-right lg:block">
           <span className="block text-sm font-medium text-black dark:text-white">
             {user.name}
-            
+
           </span>
           <span className="block text-xs">Admin</span>
         </span>
 
         <span className="h-12 w-12 rounded-full">
           {/* <img src={UserOne} alt="User" /> */}
-          <Avatar name={user.name} alt="User" size="10"/>
+          <Avatar name={user.name} alt="User" size="10" />
         </span>
 
         <svg
-          className={`hidden fill-current sm:block ${
-            dropdownOpen ? 'rotate-180' : ''
-          }`}
+          className={`hidden fill-current sm:block ${dropdownOpen ? 'rotate-180' : ''
+            }`}
           width="12"
           height="8"
           viewBox="0 0 12 8"
@@ -109,9 +108,8 @@ const DropdownUser = () => {
         ref={dropdown}
         onFocus={() => setDropdownOpen(true)}
         onBlur={() => setDropdownOpen(false)}
-        className={`absolute right-0 mt-4 flex w-62.5 flex-col rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark ${
-          dropdownOpen === true ? 'block' : 'hidden'
-        }`}
+        className={`absolute right-0 mt-4 flex w-62.5 flex-col rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark ${dropdownOpen === true ? 'block' : 'hidden'
+          }`}
       >
         <ul className="flex flex-col gap-5 border-b border-stroke px-6 py-7.5 dark:border-strokedark">
           <li>
@@ -141,7 +139,7 @@ const DropdownUser = () => {
           </li>
           <li>
             <Link
-              to="#"
+              to="/customers"
               className="flex items-center gap-3.5 text-sm font-medium duration-300 ease-in-out hover:text-primary lg:text-base"
             >
               <svg
