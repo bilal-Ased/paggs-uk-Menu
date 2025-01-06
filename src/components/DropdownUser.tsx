@@ -81,7 +81,6 @@ const DropdownUser = () => {
         </span>
 
         <span className="h-12 w-12 rounded-full">
-          {/* <img src={UserOne} alt="User" /> */}
           <Avatar name={user.name} alt="User" size="10" />
         </span>
 

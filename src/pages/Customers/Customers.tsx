@@ -68,7 +68,7 @@ const Customers = () => {
         const url = window.URL.createObjectURL(blob);
         const link = document.createElement("a");
         link.href = url;
-        link.setAttribute("download", "customers_export.csv"); // Adjust the filename as needed
+        link.setAttribute("download", "customers.xlsx");
         document.body.appendChild(link);
         link.click();
         link.remove();
@@ -79,6 +79,7 @@ const Customers = () => {
       console.error("An error occurred while exporting:", error);
     }
   };
+
 
   return (
     <div>
