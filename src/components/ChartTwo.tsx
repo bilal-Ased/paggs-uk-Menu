@@ -87,7 +87,7 @@ const ChartTwo: React.FC = () => {
   useEffect(() => {
     // Fetching data from the backend API
     axios
-      .get('http://127.0.0.1:8000/api/booking-peak-hours/chart')
+      .get('https://coral-app-fvdip.ondigitalocean.app/api/booking-peak-hours/chart')
       .then((response) => {
         // Transform the response data into the format required for the chart
         const data = response.data;
