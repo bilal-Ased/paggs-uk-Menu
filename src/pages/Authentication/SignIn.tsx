@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import LogoDark from '../../images/logo/logo.jpg';
 import Logo from '../../images/logo/logo.jpg';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 const SignIn = () => {
   const [email, setEmail] = useState('');
@@ -48,8 +48,19 @@ const SignIn = () => {
     }
   };
 
+  // useEffect(() => {
+  //   // Disable vertical scrolling
+  //   document.body.style.overflowY = 'hidden';
+
+  //   // Cleanup: reset when component is unmounted
+  //   return () => {
+  //     document.body.style.overflowY = 'auto';
+  //   };
+  // }, []);
+
   return (
     <>
+
       <div className="rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark">
         <div className="flex flex-wrap items-center">
           <div className="hidden w-full xl:block xl:w-1/2">
@@ -229,10 +240,15 @@ const SignIn = () => {
                     required
                   />
                 </div>
+                <div className="forgotPassword text-start">
+                  <a href="/reset-password" className="text-customBlue font-semibold hover:underline focus:outline-none">
+                    Forgot Password?
+                  </a>
+                </div>
 
                 <button
                   type="submit"
-                  className={`w-full py-2 px-4 rounded-md bg-blue-500 text-white ${loading ? 'opacity-50' : ''
+                  className={`py-2 px-4 rounded-md bg-customBlue text-white float-right ${loading ? 'opacity-50' : ''
                     }`}
                   disabled={loading}
                 >

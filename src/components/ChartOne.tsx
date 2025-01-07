@@ -86,6 +86,9 @@ const options: ApexOptions = {
   yaxis: {
     title: { style: { fontSize: '0px' } },
     min: 0,
+    labels: {
+      formatter: (value) => Math.round(value).toString(),
+    },
   },
 };
 
